@@ -11,7 +11,13 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
   const [nom, setNom] = useState('');
   const [couverture, setCouverture] = useState('');
-  const [couleur, setCouleur] = useState('#900');
+  const [couleur, setCouleur] = useState('#537169');
+
+  function viderChamps() {
+    setNom('');
+    setCouverture('');
+    setCouleur('#537169');
+  }
 
   const theme = createMuiTheme({
     palette: {
@@ -41,6 +47,7 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
             type="text"
             fullWidth
             onChange={(e) => setNom(e.target.value)}
+            defaultValue={nom}
           />
           <TextField
             margin="dense"
@@ -49,25 +56,27 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
             type="text"
             fullWidth
             onChange={(e) => setCouverture(e.target.value)}
+            defaultValue={couverture}
           />
           <TwitterPicker 
             width="100%" 
             triangle="hide" 
             colors={myColors}
             onChangeComplete={(couleur, e) => setCouleur(couleur.hex)}
+            color={couleur}
           />
         </DialogContent>
         <DialogActions>
         <ThemeProvider theme={theme}>
           <Button 
-          onClick={()=>setOuvert(false)} 
+          onClick={()=>{setOuvert(false); viderChamps()}} 
           variant="contained"
           color="secondary"
           >
             Annuler
           </Button>
           <Button 
-          onClick={() => nom !== '' && gererAjout(nom, couverture, couleur)} 
+          onClick={() => {nom !== '' && gererAjout(nom, couverture, couleur); viderChamps(); }} 
           variant="contained"
           color="primary">
             Ajouter
