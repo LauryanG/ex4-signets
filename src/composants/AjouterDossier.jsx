@@ -3,6 +3,8 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import { withStyles } from '@material-ui/core/styles';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useState } from 'react';
 import { TwitterPicker } from 'react-color';
@@ -19,6 +21,12 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
     setCouleur('#537169');
   }
 
+  const DialogContent = withStyles((theme) => ({
+    root: {
+      padding: theme.spacing(2),
+    },
+  }))(MuiDialogContent);
+  
   const theme = createMuiTheme({
     palette: {
       primary: {
