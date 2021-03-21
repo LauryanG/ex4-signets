@@ -1,7 +1,9 @@
 import './Dossier.scss'; 
 import { IconButton } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { useState } from 'react';
+import MenuDossiers from './MenuDossiers';
+
 export default function Dossier({id, nom, couleur, datemodif, couverture}) {
   return (
     <article className="Dossier" style={{backgroundColor: couleur}}>
@@ -16,7 +18,7 @@ export default function Dossier({id, nom, couleur, datemodif, couverture}) {
         <p>Modifié : {formaterDate(datemodif)}</p>
       </div>
       <IconButton className="modifier" aria-label="modifier" size="small">
-        <MoreVertIcon />
+        <MenuDossiers />
       </IconButton>
     </article>
   );
