@@ -6,11 +6,27 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useState } from 'react';
 import { TwitterPicker } from 'react-color';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
   const [nom, setNom] = useState('');
   const [couverture, setCouverture] = useState('');
   const [couleur, setCouleur] = useState('#900');
+
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: "#008000",
+        contrastText: "#fff"
+      },
+      secondary: {
+        main: "#ff0000",
+        contrastText: "#fff"
+      },
+    },
+  });
+
+  const myColors = ['#ff0000', '#ffa500', '#ffff00', '#008000', '#0000ff', '#4b0082'];
 
   return (
     <div className="AjouterDossier">
@@ -37,16 +53,26 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
           <TwitterPicker 
             width="100%" 
             triangle="hide" 
+            colors={myColors}
             onChangeComplete={(couleur, e) => setCouleur(couleur.hex)}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>setOuvert(false)} color="primary">
+        <ThemeProvider theme={theme}>
+          <Button 
+          onClick={()=>setOuvert(false)} 
+          variant="contained"
+          color="secondary"
+          >
             Annuler
           </Button>
-          <Button onClick={() => nom !== '' && gererAjout(nom, couverture, couleur)} color="primary">
+          <Button 
+          onClick={() => nom !== '' && gererAjout(nom, couverture, couleur)} 
+          variant="contained"
+          color="primary">
             Ajouter
           </Button>
+        </ThemeProvider>
         </DialogActions>
       </Dialog>
     </div>
