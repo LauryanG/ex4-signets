@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 import {firestore} from '../firebase';
 import AjouterDossier from './AjouterDossier';
+import imgCouverture from '../images/couverture.webp';
 
 export default function Appli() {
   // État de l'utilisateur
@@ -41,6 +42,11 @@ export default function Appli() {
   
   // Ajouter un dossier
   function gererAjout(nom, couverture, couleur) {
+    if(couverture == "") {
+      couverture = imgCouverture;
+    } else {
+      couverture = couverture;
+    }
     // Objet à ajouter dans la collection "dossiers" sur Firestore
     const objDossier = {
       nom: nom,
